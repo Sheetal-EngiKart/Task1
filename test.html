@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<body>
+<div class="container">
+<h3>Resister yourself here!!</h3>
+<div ng-app="myApp" ng-controller="myCtrl">
+	 <form method='GET' class = "bs-example bs-example-form" role = "form" enctype="application/json">
+		<div class="col-md-4" ng-repeat="field in fields">
+			<div class="col">
+     			<div class = "input-group">
+	 		  		<span class="input-group-addon">{{field}}</span>
+	    			<input type = "text" name= "name" class = "form-control" placeholder = "Enter Name Here..">
+	    			<br>
+				</div>
+      		</div>
+        </div>
+  <h3 layout-align="center"> Registered Participants</h3>
+	<table class = "table table-striped" id="ParticipantTable">
+        <tr>
+                 <th>No.</th>
+		         <th>Name</th>
+		         <th>City</th>
+         		 <th>Pincode</th>
+			 	 <th>Action</th>
+		
+     	 	</tr>
+     	 	
+<tr ng-repeat='participant in ParticipantTable'>
+<td>{{ $index+1 }}</td>
+<td>{{ Participant.Name }}</td>
+<td>{{ participant.City }}</td>
+<td>{{ participant.Pincode }}</td>
+<td><button type = "button" class = "btn btn-default" id=$index onclick="removeItem($index)">Delete</button></td>
+</tr>
+</table>
+
+</div>
+
+<script>
+
+
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope) {
+    $scope.ParticipantTable = JSON.parse(localStorage.getItem(localStorage.key(0)));
+     $scope.fields=['Name','City','Pincode'];
+   //var Participants= JSON.parse(ParticipantTable);
+   $scope.removeItem = function(index){
+     //ParticipantTable.splice(index, 1);
+    
+     alert(ParticipantTable);
+}
+  
+});
+
+function DeleteParticipant(){
+  var id = $(this).attr('id');
+  alert(id);
+
+}
+
+
+</script>
+
+</body>
+</html>
