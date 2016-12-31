@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script>var gmsg</script>
+<body>
+<div class="container">
+<div ng-app="myApp" ng-controller="myCtrl"> 
+<h3> Table of content</h3>
+<table class = "table table-striped" id="ParticipantTable">
+		<tr>
+				 <th>No.</th>
+				 <th>Title</th>
+				 <th>Description</th>
+				 <th>Action</th>
+			</tr>
+			
+<tr ng-repeat='m in msg'>
+<td>{{ m.id }}</td>
+<td>{{ m.title }}</td>
+<td>{{ m.body }}</td>
+<td><button id='{{ $index }}' type = "button" class = "btn btn-default"  onclick="removeItem()">Delete</button></td>
+</tr>
+</table>
+</div>
+</div>
+<script>
+
+function removeItem(){
+var deleteId=this.id;
+alert(deleteId);
+gmsg=gmsg.splice(deleteId,1);
+}
+
+var app = angular.module('myApp', []);
+app.controller('myCtrl', function($scope,$http) {
+$http.get('http://jsonplaceholder.typicode.com/posts').then(function(response) {
+        $scope.msg = response.data;
+		gmsg=response.data;
+    });
+	});
+	
+</script>
+
+</body>
+</html>
